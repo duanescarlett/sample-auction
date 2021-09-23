@@ -51,6 +51,17 @@ contract ACoin is ERC20, ERC20Burnable, Pausable, Ownable, ERC20Permit, ERC20Vot
       super._mint(to, amount);
     }
 
+    function transfer(address recipient, uint256 amount) 
+      public 
+      virtual
+      override
+      returns (bool)
+    {
+      require(balanceOf(_msgSender()) > 10, "You need at least 10 tokens");
+      super._transfer(_msgSender(), recipient, amount);
+      return true;
+    }
+
     function _burn(address account, uint256 amount)
       internal
       override(ERC20, ERC20Votes)

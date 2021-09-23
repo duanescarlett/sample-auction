@@ -251,6 +251,10 @@ contract NFTMarket is ReentrancyGuard {
     emit HighestBidIncrease(msgSender, msgValue);
   }
 
+  function getHighestBid(uint256 _id) public view returns(uint256) {
+    return idToMarketItem[_id].highestBid;
+  }
+
   function withdraw() public returns(bool) {
     uint256 amount = pendingRefunds[msg.sender];
     address msgSender = msg.sender;
@@ -286,6 +290,7 @@ contract NFTMarket is ReentrancyGuard {
 
     // Transfer NFT to the highestBidder
     IERC721(nftContract).transferFrom(address(this), idToMarketItem[_id].highestBidder, _id);
+    
     idToMarketItem[_id].owner = payable(idToMarketItem[_id].highestBidder);
     idToMarketItem[_id].sold = true;
     _itemsSold.increment();

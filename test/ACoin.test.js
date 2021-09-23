@@ -1,4 +1,8 @@
 const { expect } = require("chai")
+const chai = require("chai")
+const { solidity } = require("ethereum-waffle")
+
+chai.use(solidity)
 
 describe("Token contract", () => {
 
@@ -15,7 +19,6 @@ describe("Token contract", () => {
   })
 
   it("Deployment should assign the total supply of tokens to the owner", async () => {
-
     expect(await hardhatToken.totalSupply()).to.equal(ownerBalance)
   })
 
@@ -29,4 +32,13 @@ describe("Token contract", () => {
     await hardhatToken.connect(addr1).transfer(addr2.address, 20)
     expect(await hardhatToken.balanceOf(addr2.address)).to.equal(20)
   })
+
+  // it("Should have more than 10 token to transfer any", async () => {
+  //   await hardhatToken.transfer(addr1.address, 2)
+  //   expect(await hardhatToken.connect(addr1).transfer(addr2.address, 1))
+  //   .to
+  //   .be
+  //   .revertedWith('You need at least 10 Tokens')
+  //   // expect(await hardhatToken.balanceOf(addr2.address)).to.equal(0)
+  // })
 })

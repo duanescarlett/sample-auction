@@ -141,8 +141,8 @@ const Mint = ({}) => {
     <div className="container">
       <div className="row">
 
-      <Link href="/profile">
-        <a>Go to profile...</a>
+      <Link href="/">
+        <a>Go to Market</a>
       </Link>
 
         <div className="mb-3">
@@ -186,13 +186,6 @@ const Mint = ({}) => {
               </label>
             </div>
 
-        </div>
-        <div className="mb-3">
-          <label for="exampleFormControlInput1" className="form-label">End Date</label>          
-          <input type="date"
-            className="form-control"         
-            onChange={e => updateFormInput({ ...formInput, endtime: e.target.value })}
-            name="dateofbirth" id="dateofbirth" />
         </div>
         <div className="mb-3">
           <label for="exampleFormControlInput1" className="form-label">File</label>

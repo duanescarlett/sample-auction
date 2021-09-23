@@ -30,7 +30,8 @@ describe("NFT Market Auction", () => {
 
     // Set the auction end time
     auctionPrice = ethers.utils.parseUnits('100', 'ether')
-    timed = new Date(24 * 3600 * 1000)
+    // timed = new Date(24 * 3600 * 1000)
+    timed = new Date()
 
     // Mint 2 NFTs with id 1 & 2
     await nft.mint("https://www.myTokenLocation.com", "Master Piece")
@@ -58,12 +59,12 @@ describe("NFT Market Auction", () => {
   })
 
   it('Place a bid on an NFT', async () => {
-
     [_, buyerAddress] = await ethers.getSigners()
-    // console.log(buyerAddress)
-
-    let event = await market.connect(buyerAddress).bid(1, { value: listingPrice })
-    // console.log(event)
+    let amount = ethers.utils.parseUnits('200', 'ether')
+    await market.connect(buyerAddress).bid(1, { value: amount })
+    let amt = await market.connect(buyerAddress).getHighestBid(1)
+    console.log(amt.toString())
+    // await market.connect(buyerAddress).auctionEnd(2, nftContractAddress)
   })
 
   it('Get Listing Fee', async () => {
