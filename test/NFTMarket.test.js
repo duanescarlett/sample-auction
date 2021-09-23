@@ -149,6 +149,6 @@ describe("NFT Market Sale", () => {
 
       return item
     }))
-    // console.log('items: ', items)
+    console.log('items: ', items)
   })
 })

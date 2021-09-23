@@ -37,6 +37,7 @@ contract NFTMarket is ReentrancyGuard {
     address payable seller;
     address payable owner;
     address payable artist;
+    // Price for sale
     uint256 price;
     bool sold;
     // Auction's end time  
@@ -137,23 +138,25 @@ contract NFTMarket is ReentrancyGuard {
     address nftContract,
     uint256 itemId
     ) public payable nonReentrant {
-      uint256 price = idToMarketItem[itemId].price;
-      uint256 tokenId = idToMarketItem[itemId].tokenId;
-      require(msg.value == price, "Please submit the asking price in order to complete the purchase");
-      
-      // Subtract royalty
-      // (msg.value * 15) / 1000
-      uint256 artistCut = (msg.value / 1000) * 12;
-      uint256 sellerCut = msg.value - artistCut;
-      
-      idToMarketItem[itemId].artist.transfer(artistCut);
-      idToMarketItem[itemId].seller.transfer(sellerCut);
+    uint256 price = idToMarketItem[itemId].price;
+    uint256 tokenId = idToMarketItem[itemId].tokenId;
+    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+    
+    // Subtract royalty
+    // (msg.value * 15) / 1000
+    uint256 artistCut = (msg.value / 1000) * 12;
+    uint256 sellerCut = msg.value - artistCut;
+    
+    idToMarketItem[itemId].artist.transfer(artistCut);
+    idToMarketItem[itemId].seller.transfer(sellerCut);
 
-      IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
-      idToMarketItem[itemId].owner = payable(msg.sender);
-      idToMarketItem[itemId].sold = true;
-      _itemsSold.increment();
-      payable(owner).transfer(listingPrice);
+    // Transfer NFT to the buyer
+    IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
+
+    idToMarketItem[itemId].owner = payable(msg.sender);
+    idToMarketItem[itemId].sold = true;
+    _itemsSold.increment();
+    payable(owner).transfer(listingPrice);
   }
 
   function fetchMarketItems() public view returns (MarketItem[] memory) {
