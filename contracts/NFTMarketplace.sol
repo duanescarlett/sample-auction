@@ -113,7 +113,7 @@ contract NFTMarket is ReentrancyGuard {
       false,
       auctionEndTime,
       highestBidder,
-      highestBid,
+      price,
       auction,
       floorPrice,
       false

@@ -174,14 +174,14 @@ const Mint = ({}) => {
         </div>
         <div className="mb-3">
           <label for="exampleFormControlInput1" className="form-label">Is this for Auction?</label>
-            <div class="form-check">
+            <div className="form-check">
               <input 
-                class="form-check-input" 
+                className="form-check-input" 
                 type="checkbox" 
                 value="true" 
                 onChange={e => updateFormInput({ ...formInput, auction: e.target.value })}
                 id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked">
+              <label className="form-check-label" for="flexCheckChecked">
                 Yes
               </label>
             </div>

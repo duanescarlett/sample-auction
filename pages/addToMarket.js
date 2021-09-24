@@ -127,7 +127,7 @@ const addToMarket = ({}) => {
       </Link>
 
         <div className="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Name</label>
+          <label for="exampleFormControlInput1" className="form-label">Name</label>
           <input 
             type="text" 
             className="form-control" 
@@ -136,7 +136,7 @@ const addToMarket = ({}) => {
             placeholder="Asset Name" />
         </div>
         <div className="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+          <label for="exampleFormControlTextarea1" className="form-label">Description</label>
           <textarea 
             className="form-control" 
             placeholder="Asset Description"
@@ -145,7 +145,7 @@ const addToMarket = ({}) => {
             rows="3" />
         </div>
         <div className="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Price</label>
+          <label for="exampleFormControlInput1" className="form-label">Price</label>
           <input 
             type="text" 
             className="form-control" 
@@ -154,7 +154,7 @@ const addToMarket = ({}) => {
             placeholder="Asset price in MATIC" />
         </div>
         <div className="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">File</label>
+          <label for="exampleFormControlInput1" className="form-label">File</label>
           <input 
             type="file" 
             className="form-control" 

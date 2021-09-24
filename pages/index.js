@@ -30,7 +30,10 @@ function HomePage() {
 
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
-      console.log(i)
+      let highBid = await marketContract.getHighestBid(i.tokenId)
+      highBid = ethers.utils.formatUnits(highBid.toString(), 'ether')
+      // console.log('Really? ', ethers.utils.formatUnits(highBid.toString(), 'ether'))
+
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let date = new Date(i.auctionEndTime.toNumber())
@@ -42,6 +45,7 @@ function HomePage() {
         owner: i.owner,
         image: tokenUri,
         endtime: time,
+        highestBid: highBid,
         name: meta.data.name,
         description: meta.data.description
       }
